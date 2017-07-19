@@ -5,76 +5,54 @@
  */
 package imageprocessing;
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-
+import java.io.*;
+import java.util.Arrays;
+import javax.imageio.*;
 /**
  *
  * @author malsha_h
  */
 public class MeanFilter {
-    public String filter() throws IOException{
-       
-        BufferedImage img = ImageIO.read(new File("images/hair.jpg"));
-
-//get dimensions
-        int maxHeight = img.getHeight();
-        int maxWidth = img.getWidth();
-
-//create 2D Array for new picture
-int pictureFile[][] = new int [maxHeight][maxWidth];
-for( int i = 0; i < maxHeight; i++ ){
-    for( int j = 0; j < maxWidth; j++ ){
-        pictureFile[i][j] = img.getRGB( j, i );
-    }
-}
-
-//Apply Mean Filter
-for (int v=1; v<=maxHeight-2; v++) {
-    for (int u=1; u<=maxWidth-2; u++) {
-        //compute filter result for position (u,v)
-
-        int sum = 0;
-        for (int j=-1; j<=1; j++) {
-            for (int i=-1; i<=1; i++) {
-                try{
-                    int p = pictureFile[u+i][v+j];
-                    sum = sum + p;
-                }catch(ArrayIndexOutOfBoundsException e){
-                }
-                
-                
-
+    public BufferedImage filter(BufferedImage image1) throws IOException{
+//        File f=new File("images/hair.jpg");                               //Input Photo File
+        Color[] pixel=new Color[9];
+        int[] R=new int[9];
+        int[] B=new int[9];
+        int[] G=new int[9];
+        File output=new File("images/mean.jpg");
+        BufferedImage outImg=ImageIO.read(output);
+//        BufferedImage img=ImageIO.read(f);
+        BufferedImage img = image1;
+        for(int i=1;i<img.getWidth()-1;i++)
+            for(int j=1;j<img.getHeight()-1;j++)
+            {
+               pixel[0]=new Color(img.getRGB(i-1,j-1));
+               pixel[1]=new Color(img.getRGB(i-1,j));
+               pixel[2]=new Color(img.getRGB(i-1,j+1));
+               pixel[3]=new Color(img.getRGB(i,j+1));
+               pixel[4]=new Color(img.getRGB(i+1,j+1));
+               pixel[5]=new Color(img.getRGB(i+1,j));
+               pixel[6]=new Color(img.getRGB(i+1,j-1));
+               pixel[7]=new Color(img.getRGB(i,j-1));
+               pixel[8]=new Color(img.getRGB(i,j));
+               int sumr = 0;
+               int sumg = 0;
+               int sumb = 0;
+               for(int k=0;k<9;k++){
+                   sumr+=pixel[k].getRed();
+                   sumb+=pixel[k].getBlue();
+                   sumg+=pixel[k].getGreen();
+               }
+            img.setRGB(i,j,new Color(sumr/9, sumg/9, sumb/9).getRGB());
             }
-        }
-
-        int q = (int) (sum / 9);
-        try{pictureFile[u][v] = q;}catch(ArrayIndexOutOfBoundsException e){}
-        
+        ImageIO.write(img,"jpg",output);
+        return outImg;
     }
-}
-
-//Turn the 2D array back into an image
-BufferedImage theImage = new BufferedImage(
-    maxHeight, 
-    maxWidth, 
-    BufferedImage.TYPE_BYTE_GRAY);
-int value;
-for(int y = 0; y<maxHeight; y++){
-    for(int x = 0; x<maxWidth; x++){
-
-        value = pictureFile[y][x] ;
-        try{theImage.setRGB(x, y, value);}catch(ArrayIndexOutOfBoundsException e){}
-        
     }
-}
-
-File outputfile = new File("saved.jpg");
-ImageIO.write(theImage, "png", outputfile);
-        return "saved.jpg";
-  
-}
-}
-    

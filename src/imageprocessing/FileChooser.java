@@ -5,10 +5,12 @@
  */
 package imageprocessing;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 
@@ -81,21 +83,7 @@ public class FileChooser extends javax.swing.JFrame {
 
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
         // TODO add your handling code here:
-        JFileChooser input = this.jFileChooser1;
-//        int result = input.showSaveDialog(this);
-        try{
-        File f = input.getSelectedFile();
-        ImageIcon imm = new ImageIcon(f.getPath());
-//                SelectFile.file = s;
-               ImageProcessingUI ui = new ImageProcessingUI();
-//               ui.setImage(imm);
-                
-//                System.out.println(s);
-                this.dispose();
-        }
-        catch(NullPointerException e){
-            this.dispose();
-        }
+        
         
     }//GEN-LAST:event_jFileChooser1ActionPerformed
 

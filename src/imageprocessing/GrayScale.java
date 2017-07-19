@@ -23,12 +23,13 @@ public class GrayScale {
     public GrayScale(){
     }
 
-    public String gray() {
+    public BufferedImage gray(BufferedImage image1) throws IOException {
         String url = "images/grayscale.jpg";
         try {
 //            File input = new File("aaa.jpg");
-            File input = new File("images/hair.jpg");
-            image = ImageIO.read(input);
+//            File input = new File("images/hair.jpg");
+//            image = ImageIO.read(input);
+            image = image1;
             width = image.getWidth();
             height = image.getHeight();
             for(int i=0; i<height; i++){
@@ -44,7 +45,7 @@ public class GrayScale {
             File ouptut = new File(url);
             ImageIO.write(image, "jpg", ouptut);
         } catch (Exception e) {}
-        
-        return url;
+        BufferedImage outImg = ImageIO.read(new File(url));
+        return outImg;
     }
 }

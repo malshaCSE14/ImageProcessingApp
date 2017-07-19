@@ -6,16 +6,23 @@
 package imageprocessing;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Malsha
  */
 public class ImageProcessingUI extends javax.swing.JFrame {
+    private BufferedImage bufferedimg;
+    
 
     /**
      * Creates new form ImageProcessingUI
@@ -49,10 +56,9 @@ public class ImageProcessingUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jButton2.setText("jButton2");
 
@@ -107,17 +113,10 @@ public class ImageProcessingUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton9.setText("Load Image");
+        jButton9.setText("Load Original Image");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
-            }
-        });
-
-        jButton11.setText("Enhance Brightness");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
             }
         });
 
@@ -128,17 +127,17 @@ public class ImageProcessingUI extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Scale Down");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Gaussian");
+        jButton3.setText(" Gaussian Filter");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Salt and Papper noise");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -151,58 +150,47 @@ public class ImageProcessingUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton9)
-                        .addGap(0, 498, Short.MAX_VALUE))
+                        .addGap(0, 494, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jButton12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(0, 0, Short.MAX_VALUE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jButton8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                                        .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jButton3))
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(97, 97, 97))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGap(0, 0, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(119, 119, 119))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
-                .addComponent(jButton9)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap(47, Short.MAX_VALUE)
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton8)
-                        .addGap(31, 31, 31)
-                        .addComponent(jButton5)
-                        .addGap(26, 26, 26)
-                        .addComponent(jButton12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton7)
-                        .addGap(154, 154, 154)
-                        .addComponent(jButton11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(54, 54, 54)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(49, 49, 49)
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(62, 62, 62))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -225,59 +213,127 @@ public class ImageProcessingUI extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        MeanFilter mn = new MeanFilter();
+        MeanFilter g = new MeanFilter();
         try {
-            String url =  mn.filter();
-            ImageIcon icon = new ImageIcon(url);
+            Icon image = jLabel1.getIcon();
+        BufferedImage image1 = new BufferedImage(image.getIconWidth(), image.getIconHeight(), BufferedImage.TYPE_INT_RGB);
+        image.paintIcon(new JPanel(), image1.getGraphics(), 0, 0);
+            BufferedImage bufferedimg = image1;
+            BufferedImage im = g.filter(bufferedimg);
+            ImageIcon icon = new ImageIcon(im);
             jLabel1.setIcon(icon);
         } catch (IOException ex) {
             Logger.getLogger(ImageProcessingUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+        
+//        MeanFilter mn = new MeanFilter();
+//        try {
+//            String url =  mn.filter();
+//            ImageIcon icon = new ImageIcon(url);
+//            jLabel1.setIcon(icon);
+//        } catch (IOException ex) {
+//            Logger.getLogger(ImageProcessingUI.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-//        FileChooser fc = new FileChooser();
-//        fc.setVisible(true);
-//        
-//        String url = SelectFile.file;
-//        System.out.println("kkk");
-//        System.out.println(url + "zzz");
-        ImageIcon icon = new ImageIcon("images/hair.jpg");
-        this.setUrl("images/hair.jpg");
-        jLabel1.setIcon(icon);
-        // TODO add your handling code here:
+
+//        ImageIcon icon = new ImageIcon("images/hair.jpg");
+//        this.setUrl("images/hair.jpg");
+//        jLabel1.setIcon(icon);
+                        JFileChooser fd = new JFileChooser();
+			fd.showOpenDialog(this);
+			File file = fd.getSelectedFile();
+			if (file == null) return;
+			try {
+				//read the image from file and store it in BufferedImage
+			BufferedImage img = ImageIO.read(file);
+                        ImageIcon icon = new ImageIcon(img);
+                        jLabel1.setIcon(icon);
+			} catch(Exception es) {
+				es.printStackTrace();
+			}
+                      
+       
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        GrayScale gr = new GrayScale();
-        String url = gr.gray();
-        ImageIcon icon = new ImageIcon(url);
-        jLabel1.setIcon(icon);
+//        Icon image = jLabel1.getIcon();
+//        
+//        BufferedImage image1 = new BufferedImage(image.getIconWidth(), image.getIconHeight(), BufferedImage.TYPE_INT_RGB);
+//        image.paintIcon(new JPanel(), image1.getGraphics(), 0, 0);
+//        this.bufferedimg = image1;
+//        
+//        GrayScale gr = new GrayScale();
+//        String url = gr.gray();
+//        
+//        ImageIcon icon = new ImageIcon(url);
+//        jLabel1.setIcon(icon);
+//        
+        
+        
+        
+        GrayScale g = new GrayScale();
+        try {
+            Icon image = jLabel1.getIcon();
+        BufferedImage image1 = new BufferedImage(image.getIconWidth(), image.getIconHeight(), BufferedImage.TYPE_INT_RGB);
+        image.paintIcon(new JPanel(), image1.getGraphics(), 0, 0);
+            BufferedImage bufferedimg = image1;
+            BufferedImage im = g.gray(bufferedimg);
+            ImageIcon icon = new ImageIcon(im);
+            jLabel1.setIcon(icon);
+        } catch (IOException ex) {
+            Logger.getLogger(ImageProcessingUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        Flip hf = new Flip();
-        String url = hf.horizontal();
-        
-        ImageIcon icon = new ImageIcon(url);
-        jLabel1.setIcon(icon);
-    }//GEN-LAST:event_jButton5ActionPerformed
+//        Flip hf = new Flip();
+//        String url = hf.horizontal();
+//        
+//        ImageIcon icon = new ImageIcon(url);
+//        jLabel1.setIcon(icon);
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
-        EnhanceBrightness eb = new  EnhanceBrightness();
-        eb.enhance();
-    }//GEN-LAST:event_jButton11ActionPerformed
+ Flip g = new Flip();
+        try {
+            Icon image = jLabel1.getIcon();
+        BufferedImage image1 = new BufferedImage(image.getIconWidth(), image.getIconHeight(), BufferedImage.TYPE_INT_RGB);
+        image.paintIcon(new JPanel(), image1.getGraphics(), 0, 0);
+            BufferedImage bufferedimg = image1;
+            BufferedImage im = g.horizontal(bufferedimg);
+            ImageIcon icon = new ImageIcon(im);
+            jLabel1.setIcon(icon);
+        } catch (IOException ex) {
+            Logger.getLogger(ImageProcessingUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
-        Flip hf = new Flip();
+//        Flip hf = new Flip();
+//        try {
+//            String url = hf.vertical();
+//            ImageIcon icon = new ImageIcon(url);
+//        jLabel1.setIcon(icon);
+//        } catch (IOException ex) {
+//            Logger.getLogger(ImageProcessingUI.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+        
+         Flip g = new Flip();
         try {
-            String url = hf.vertical();
-            ImageIcon icon = new ImageIcon(url);
-        jLabel1.setIcon(icon);
+            Icon image = jLabel1.getIcon();
+        BufferedImage image1 = new BufferedImage(image.getIconWidth(), image.getIconHeight(), BufferedImage.TYPE_INT_RGB);
+        image.paintIcon(new JPanel(), image1.getGraphics(), 0, 0);
+            BufferedImage bufferedimg = image1;
+            BufferedImage im = g.vertical(bufferedimg);
+            ImageIcon icon = new ImageIcon(im);
+            jLabel1.setIcon(icon);
         } catch (IOException ex) {
             Logger.getLogger(ImageProcessingUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -285,35 +341,57 @@ public class ImageProcessingUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton12ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        Scaledown sd = new Scaledown();
-        sd.scaledown();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        MedianFilter g = new MedianFilter();
         try {
-            // TODO add your handling code here:
-            MedianFilter mf = new MedianFilter();
-            String url = mf.filter();
-            ImageIcon icon = new ImageIcon(url);
-        jLabel1.setIcon(icon);
+            Icon image = jLabel1.getIcon();
+        BufferedImage image1 = new BufferedImage(image.getIconWidth(), image.getIconHeight(), BufferedImage.TYPE_INT_RGB);
+        image.paintIcon(new JPanel(), image1.getGraphics(), 0, 0);
+            BufferedImage bufferedimg = image1;
+            BufferedImage im = g.filter(bufferedimg);
+            ImageIcon icon = new ImageIcon(im);
+            jLabel1.setIcon(icon);
         } catch (IOException ex) {
             Logger.getLogger(ImageProcessingUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //        try {
+//            // TODO add your handling code here:
+//            MedianFilter mf = new MedianFilter();
+//            String url = mf.filter();
+//            ImageIcon icon = new ImageIcon(url);
+//            jLabel1.setIcon(icon);
+//        } catch (IOException ex) {
+//            Logger.getLogger(ImageProcessingUI.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         Gaussian g = new Gaussian();
         try {
-            BufferedImage im = g.ProcessImage();
+            Icon image = jLabel1.getIcon();
+        BufferedImage image1 = new BufferedImage(image.getIconWidth(), image.getIconHeight(), BufferedImage.TYPE_INT_RGB);
+        image.paintIcon(new JPanel(), image1.getGraphics(), 0, 0);
+            BufferedImage bufferedimg = image1;
+            BufferedImage im = g.ProcessImage(bufferedimg);
             ImageIcon icon = new ImageIcon(im);
             jLabel1.setIcon(icon);
         } catch (IOException ex) {
             Logger.getLogger(ImageProcessingUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        SaltandPapper g = new SaltandPapper();
+        Icon image = jLabel1.getIcon();
+        BufferedImage image1 = new BufferedImage(image.getIconWidth(), image.getIconHeight(), BufferedImage.TYPE_INT_RGB);
+        image.paintIcon(new JPanel(), image1.getGraphics(), 0, 0);
+        BufferedImage bufferedimg = image1;
+        BufferedImage im = g.filter(bufferedimg);
+        ImageIcon icon = new ImageIcon(im);
+        jLabel1.setIcon(icon);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -352,7 +430,6 @@ public class ImageProcessingUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -366,8 +443,7 @@ public class ImageProcessingUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 
-    void setImage(String url) {
-        ImageIcon icon = new ImageIcon(url);
+    void setImage(ImageIcon icon) {
         jLabel1.setIcon(icon);
  
         

@@ -29,24 +29,23 @@ public class Flip {
      
      return tr.filter(src, null);  //filtering
     }
-    public String vertical() throws IOException{
+    public BufferedImage vertical(BufferedImage image1) throws IOException{
         Flip obj=new Flip();
-     BufferedImage src = ImageIO.read(new File("images/hair.jpg"));  //reading image
-     BufferedImage dest=obj.flipVertical(src);  //flipping vertically
-     ImageIO.write(dest,"jpeg",new File("images/flipVer.jpg"));
-     return "images/flipVer.jpg";
+//      BufferedImage src = ImageIO.read(new File("images/hair.jpg"));  //reading image
+        BufferedImage src = image1;
+        BufferedImage dest=obj.flipVertical(src);  //flipping vertically
+        ImageIO.write(dest,"jpeg",new File("images/flipVer.jpg"));
+        BufferedImage outImg = ImageIO.read(new File("images/flipVer.jpg"));
+        return outImg;
     }
-    public String horizontal(){
-        try {
-            Flip obj=new Flip();
-            BufferedImage src=ImageIO.read(new File("images/hair.jpg"));  //reading image  //flipping vertically
-            
-            BufferedImage dest=obj.flipHorizontal(src);  //flipping horizontally
-            ImageIO.write(dest,"jpeg",new File("images/flipHor.jpg"));
-        } catch (IOException ex) {
-            Logger.getLogger(Flip.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "images/flipHor.jpg";
+    public BufferedImage horizontal(BufferedImage image1) throws IOException{
+        Flip obj=new Flip();
+//      BufferedImage src=ImageIO.read(new File("images/hair.jpg"));  //reading image  //flipping vertically
+        BufferedImage src = image1;
+        BufferedImage dest=obj.flipHorizontal(src);  //flipping horizontally
+        ImageIO.write(dest,"jpeg",new File("images/flipHor.jpg"));
+        BufferedImage outImg = ImageIO.read(new File("images/flipHor.jpg"));
+        return outImg;
     }
     
 //    public static void main(String[] args)throws Exception {

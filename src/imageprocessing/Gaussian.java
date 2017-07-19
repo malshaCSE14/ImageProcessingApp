@@ -12,18 +12,19 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public class Gaussian{
-    public BufferedImage ProcessImage() throws IOException {
-        BufferedImage image = ImageIO.read(new File("images/hair2.jpg"));
-    int width = image.getWidth();
-    int height = image.getHeight();
+    public BufferedImage ProcessImage(BufferedImage image1) throws IOException {
+//        BufferedImage image = ImageIO.read(new File("images/hair2.jpg"));
+        BufferedImage image = image1;
+        int width = image.getWidth();
+        int height = image.getHeight();
 
-    int[] pixels = image.getRGB(0, 0, width, height, null, 0, width);
-    int[] changedPixels = new int[pixels.length];
+        int[] pixels = image.getRGB(0, 0, width, height, null, 0, width);
+        int[] changedPixels = new int[pixels.length];
 
-    FastGaussianBlur(pixels, changedPixels, width, height, 2);
+        FastGaussianBlur(pixels, changedPixels, width, height, 2);
 
-    BufferedImage newImage = new BufferedImage(width, height, image.getType());
-    newImage.setRGB(0, 0, width, height, changedPixels, 0, width);
+        BufferedImage newImage = new BufferedImage(width, height, image.getType());
+        newImage.setRGB(0, 0, width, height, changedPixels, 0, width);
         System.out.println(newImage.getPropertyNames());
     return newImage;
 }

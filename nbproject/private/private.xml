@@ -3,9 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Image%20Processing%20Assignment/ImageProcessing/src/imageprocessing/MeanFilter.java</file>
+            <file>file:/D:/Image%20Processing%20Assignment/ImageProcessing/src/imageprocessing/SaltandPapper.java</file>
+            <file>file:/D:/Image%20Processing%20Assignment/ImageProcessing/src/imageprocessing/ImageProcessingUI.java</file>
+            <file>file:/D:/Image%20Processing%20Assignment/ImageProcessing/src/imageprocessing/Gaussian.java</file>
             <file>file:/D:/Image%20Processing%20Assignment/ImageProcessing/src/imageprocessing/Flip.java</file>
             <file>file:/D:/Image%20Processing%20Assignment/ImageProcessing/src/imageprocessing/ImageProcessing.java</file>
+            <file>file:/D:/Image%20Processing%20Assignment/ImageProcessing/src/imageprocessing/FileChooser.java</file>
             <file>file:/D:/Image%20Processing%20Assignment/ImageProcessing/src/imageprocessing/GrayScale.java</file>
+            <file>file:/D:/Image%20Processing%20Assignment/ImageProcessing/src/imageprocessing/MedianFilter.java</file>
         </group>
     </open-files>
 </project-private>
